@@ -7,6 +7,7 @@
     "build": "dotenv -e ./tools/env/.env.local -- hardhat compile && forge build",
     "check-branch-name": "chmod 755 tools/scripts/check_branch_naming.sh && sh tools/scripts/check_branch_naming.sh",
     "deploy:base_sepolia": "dotenv -e ./tools/env/.env.base_sepolia -- npx hardhat deploy --network base_sepolia --export ./deployments/base_sepolia.json",
+    "run:base_sepolia": "dotenv -e ./tools/env/.env.base_sepolia -- npx hardhat run --network base_sepolia",
     "prepare": "npm-run-all prepare:*",
     "prepare:husky": "husky install",
     "test": "dotenv -e ./tools/env/.env.local -- forge test -vv",

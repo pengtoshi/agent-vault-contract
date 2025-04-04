@@ -12,10 +12,7 @@ import "./interface/IAgentVaultFactory.sol";
  * @title AgentVaultFactory
  * @notice Factory contract for deploying and managing AgentVault contracts
  */
-contract AgentVaultFactory is IVaultFactory, Initializable, OwnableUpgradeable, UUPSUpgradeable {
-    /// @notice Default AI Agent address used for all created vaults
-    address public defaultAgent;
-
+contract AgentVaultFactory is IAgentVaultFactory, Initializable, OwnableUpgradeable, UUPSUpgradeable {
     /// @notice Array to store all deployed vault addresses
     address[] public vaults;
 
@@ -24,42 +21,34 @@ contract AgentVaultFactory is IVaultFactory, Initializable, OwnableUpgradeable, 
         _disableInitializers();
     }
 
-    function initialize(address initialAgent) public initializer {
+    function initialize() public initializer {
         __Ownable_init(msg.sender);
         __UUPSUpgradeable_init();
-
-        defaultAgent = initialAgent;
     }
 
-    /// @inheritdoc IVaultFactory
-    function setDefaultAgent(address newAgent) external onlyOwner {
-        address oldAgent = defaultAgent;
-        defaultAgent = newAgent;
-        emit DefaultAgentUpdated(oldAgent, newAgent);
-    }
-
-    /// @inheritdoc IVaultFactory
+    /// @inheritdoc IAgentVaultFactory
     function createVault(
         IERC20 asset,
         IStrategy strategy,
         address vaultMaster,
+        address agent,
         string memory name,
         string memory symbol
-    ) external onlyOwner returns (address vault) {
+    ) external returns (address vault) {
         require(address(asset) != address(0), "ERC20: invalid contract address");
         require(vaultMaster != address(0), "Vault: invalid vault master");
 
-        vault = address(new AgentVault(asset, strategy, vaultMaster, defaultAgent, name, symbol));
+        vault = address(new AgentVault(asset, strategy, vaultMaster, agent, name, symbol));
         vaults.push(vault);
         emit VaultCreated(vault, address(asset), name, symbol);
     }
 
-    /// @inheritdoc IVaultFactory
+    /// @inheritdoc IAgentVaultFactory
     function getAllVaults() external view returns (address[] memory) {
         return vaults;
     }
 
-    /// @inheritdoc IVaultFactory
+    /// @inheritdoc IAgentVaultFactory
     function getVaultCount() external view returns (uint256) {
         return vaults.length;
     }

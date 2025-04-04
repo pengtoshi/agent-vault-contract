@@ -2,9 +2,9 @@
 pragma solidity ^0.8.27;
 
 import "../common/BaseFixture.sol";
-import {TestToken} from "../mock/TestToken.sol";
-import {TestDefi} from "../mock/TestDefi.sol";
-import {TestStrategy} from "../mock/TestStrategy.sol";
+import {TestToken} from "contracts/mock/TestToken.sol";
+import {TestDefi} from "contracts/mock/TestDefi.sol";
+import {TestStrategy} from "contracts/mock/TestStrategy.sol";
 import {AgentVault} from "contracts/AgentVault.sol";
 
 contract AgentVaultTest is BaseFixture {
@@ -22,7 +22,14 @@ contract AgentVaultTest is BaseFixture {
 
         // Create vault
         vm.startPrank(users.owner);
-        address vaultAddress = vaultFactory.createVault(IERC20(testToken), strategy, users.owner, "Test Vault", "TV");
+        address vaultAddress = vaultFactory.createVault(
+            IERC20(testToken),
+            strategy,
+            users.owner,
+            users.agent,
+            "Test Vault",
+            "TV"
+        );
         vault = AgentVault(vaultAddress);
         vm.stopPrank();
     }

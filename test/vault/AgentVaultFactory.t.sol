@@ -2,9 +2,9 @@
 pragma solidity ^0.8.27;
 
 import "../common/BaseFixture.sol";
-import {TestToken} from "../mock/TestToken.sol";
-import {TestDefi} from "../mock/TestDefi.sol";
-import {TestStrategy} from "../mock/TestStrategy.sol";
+import {TestToken} from "contracts/mock/TestToken.sol";
+import {TestDefi} from "contracts/mock/TestDefi.sol";
+import {TestStrategy} from "contracts/mock/TestStrategy.sol";
 import {AgentVault} from "contracts/AgentVault.sol";
 import {IStrategy} from "contracts/interface/IStrategy.sol";
 
@@ -17,7 +17,6 @@ contract AgentVaultFactoryTest is BaseFixture {
     string constant VAULT_SYMBOL = "aVTEST";
 
     event VaultCreated(address indexed vault, address indexed asset, string name, string symbol);
-    event DefaultAgentUpdated(address indexed oldAgent, address indexed newAgent);
 
     function setUp() public virtual override {
         super.setUp();
@@ -31,33 +30,11 @@ contract AgentVaultFactoryTest is BaseFixture {
     }
 
     function test_Initialize() public {
-        assertEq(vaultFactory.defaultAgent(), users.agent);
         assertEq(vaultFactory.owner(), users.owner);
         assertEq(vaultFactory.getVaultCount(), 0);
 
         address[] memory vaults = vaultFactory.getAllVaults();
         assertEq(vaults.length, 0);
-    }
-
-    function test_SetDefaultAgent() public {
-        vm.startPrank(users.owner);
-
-        vm.expectEmit(true, true, false, false);
-        emit DefaultAgentUpdated(users.agent, users.alice);
-
-        vaultFactory.setDefaultAgent(users.alice);
-        assertEq(vaultFactory.defaultAgent(), users.alice);
-
-        vm.stopPrank();
-    }
-
-    function test_RevertWhen_NonOwnerSetsDefaultAgent() public {
-        vm.startPrank(users.alice);
-
-        vm.expectRevert(abi.encodeWithSignature("OwnableUnauthorizedAccount(address)", users.alice));
-        vaultFactory.setDefaultAgent(users.bob);
-
-        vm.stopPrank();
     }
 
     function test_CreateVault() public {
@@ -69,6 +46,7 @@ contract AgentVaultFactoryTest is BaseFixture {
             IERC20(testToken),
             IStrategy(testStrategy),
             users.owner,
+            users.agent,
             VAULT_NAME,
             VAULT_SYMBOL
         );
@@ -112,20 +90,18 @@ contract AgentVaultFactoryTest is BaseFixture {
         vm.stopPrank();
     }
 
-    function test_RevertWhen_NonOwnerCreatesVault() public {
-        vm.startPrank(users.alice);
-
-        vm.expectRevert(abi.encodeWithSignature("OwnableUnauthorizedAccount(address)", users.alice));
-        vaultFactory.createVault(IERC20(testToken), IStrategy(testStrategy), users.owner, VAULT_NAME, VAULT_SYMBOL);
-
-        vm.stopPrank();
-    }
-
     function test_RevertWhen_InvalidAssetAddress() public {
         vm.startPrank(users.owner);
 
         vm.expectRevert("ERC20: invalid contract address");
-        vaultFactory.createVault(IERC20(address(0)), IStrategy(testStrategy), users.owner, VAULT_NAME, VAULT_SYMBOL);
+        vaultFactory.createVault(
+            IERC20(address(0)),
+            IStrategy(testStrategy),
+            users.owner,
+            users.agent,
+            VAULT_NAME,
+            VAULT_SYMBOL
+        );
 
         vm.stopPrank();
     }
@@ -134,7 +110,14 @@ contract AgentVaultFactoryTest is BaseFixture {
         vm.startPrank(users.owner);
 
         vm.expectRevert("Vault: invalid vault master");
-        vaultFactory.createVault(IERC20(testToken), IStrategy(testStrategy), address(0), VAULT_NAME, VAULT_SYMBOL);
+        vaultFactory.createVault(
+            IERC20(testToken),
+            IStrategy(testStrategy),
+            address(0),
+            users.agent,
+            VAULT_NAME,
+            VAULT_SYMBOL
+        );
 
         vm.stopPrank();
     }

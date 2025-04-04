@@ -42,7 +42,7 @@ abstract contract BaseFixture is Test, Constants, Utils {
 
         /* deploy vault factory */
         address vaultFactoryImplementation = address(new AgentVaultFactory());
-        bytes memory vaultFactoryInitData = abi.encodeCall(AgentVaultFactory.initialize, (users.agent));
+        bytes memory vaultFactoryInitData = abi.encodeCall(AgentVaultFactory.initialize, ());
         address vaultFactoryProxy = address(new ERC1967Proxy(vaultFactoryImplementation, vaultFactoryInitData));
         vaultFactory = AgentVaultFactory(vaultFactoryProxy);
     }
