@@ -10,7 +10,7 @@ import {IHello} from "contracts/interface/IHello.sol";
 import {Hello} from "contracts/Hello.sol";
 import {HelloUpgradeable} from "contracts/HelloUpgradeable.sol";
 import {IVaultFactory} from "contracts/interface/IVaultFactory.sol";
-import {VaultFactory} from "contracts/VaultFactory.sol";
+import {AgentVaultFactory} from "contracts/AgentVaultFactory.sol";
 import {Constants} from "./Constants.sol";
 import {Users} from "./Users.sol";
 
@@ -20,7 +20,7 @@ abstract contract BaseFixture is Test, Constants {
     Users internal users;
     IHello internal hello;
     IHello internal helloUpgradeable;
-    VaultFactory internal vaultFactory;
+    AgentVaultFactory internal vaultFactory;
 
     function setUp() public virtual {
         users = Users({
@@ -40,17 +40,11 @@ abstract contract BaseFixture is Test, Constants {
         /* deploy normal contracts */
         hello = IHello(new Hello("Pengtoshi Nakamoto"));
 
-        /* deploy upgradeable contracts */
-        address helloUpgradeableImplementation = address(new HelloUpgradeable());
-        bytes memory helloUpgradeableInitData = abi.encodeCall(HelloUpgradeable.initialize, ("Pengtoshi Nakamoto"));
-        address helloProxy = address(new ERC1967Proxy(helloUpgradeableImplementation, helloUpgradeableInitData));
-        helloUpgradeable = IHello(helloProxy);
-
         /* deploy vault factory */
-        address vaultFactoryImplementation = address(new VaultFactory());
-        bytes memory vaultFactoryInitData = abi.encodeCall(VaultFactory.initialize, (users.agent));
+        address vaultFactoryImplementation = address(new AgentVaultFactory());
+        bytes memory vaultFactoryInitData = abi.encodeCall(AgentVaultFactory.initialize, (users.agent));
         address vaultFactoryProxy = address(new ERC1967Proxy(vaultFactoryImplementation, vaultFactoryInitData));
-        vaultFactory = VaultFactory(vaultFactoryProxy);
+        vaultFactory = AgentVaultFactory(vaultFactoryProxy);
     }
 
     function createUser(string memory name) internal returns (address payable user) {

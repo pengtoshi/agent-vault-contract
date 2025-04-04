@@ -3,8 +3,8 @@
 local_branch_name="$(git rev-parse --abbrev-ref HEAD)"
 error_message="[Error] Invalid branch name: $local_branch_name"
 
-if [[ $local_branch_name =~ ^(master)$ ]]; then
-    echo "\033[32m✔\033[m Branch(Master): $local_branch_name"
+if [[ $local_branch_name =~ ^(main)$ ]]; then
+    echo "\033[32m✔\033[m Branch(Main): $local_branch_name"
     exit 0
 elif [[ $local_branch_name =~ ^(release\/([0-9.]+))$ ]]; then
     echo "\033[32m✔\033[m Branch(Release): $local_branch_name"

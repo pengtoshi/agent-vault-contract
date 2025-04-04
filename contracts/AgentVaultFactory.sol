@@ -4,14 +4,15 @@ pragma solidity ^0.8.27;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./AgentVault.sol";
 import "./interface/IVaultFactory.sol";
-import "./Vault.sol";
 
 /**
- * @title VaultFactory
- * @notice Factory contract for deploying and managing Vault contracts
+ * @title AgentVaultFactory
+ * @notice Factory contract for deploying and managing AgentVault contracts
  */
-contract VaultFactory is IVaultFactory, Initializable, OwnableUpgradeable, UUPSUpgradeable {
+contract AgentVaultFactory is IVaultFactory, Initializable, OwnableUpgradeable, UUPSUpgradeable {
     /// @notice Default AI Agent address used for all created vaults
     address public defaultAgent;
 
@@ -40,6 +41,7 @@ contract VaultFactory is IVaultFactory, Initializable, OwnableUpgradeable, UUPSU
     /// @inheritdoc IVaultFactory
     function createVault(
         IERC20 asset,
+        IStrategy strategy,
         address vaultMaster,
         string memory name,
         string memory symbol
@@ -47,8 +49,7 @@ contract VaultFactory is IVaultFactory, Initializable, OwnableUpgradeable, UUPSU
         require(address(asset) != address(0), "ERC20: invalid contract address");
         require(vaultMaster != address(0), "Vault: invalid vault master");
 
-        vault = address(new Vault(asset, vaultMaster, defaultAgent, name, symbol));
-
+        vault = address(new AgentVault(asset, strategy, vaultMaster, defaultAgent, name, symbol));
         vaults.push(vault);
         emit VaultCreated(vault, address(asset), name, symbol);
     }

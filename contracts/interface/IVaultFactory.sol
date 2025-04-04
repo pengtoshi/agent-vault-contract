@@ -2,6 +2,7 @@
 pragma solidity ^0.8.27;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./IStrategy.sol";
 
 /**
  * @title IVaultFactory
@@ -25,15 +26,17 @@ interface IVaultFactory {
     function setDefaultAgent(address newAgent) external;
 
     /**
-     * @notice Creates a new Vault contract
-     * @param asset Underlying asset token address
-     * @param vaultMaster Address of the vault master
-     * @param name Name of the vault token
-     * @param symbol Symbol of the vault token
-     * @return vault Address of the newly created vault
+     * @notice Creates a new AgentVault.
+     * @param asset The ERC20 asset address for deposit/withdraw operations.
+     * @param strategy The strategy contract address that AgentVault will use.
+     * @param vaultMaster The address that will have the VAULT_MASTER_ROLE in the new vault.
+     * @param name The name of the vault token.
+     * @param symbol The symbol of the vault token.
+     * @return vault The address of the newly deployed AgentVault contract.
      */
     function createVault(
         IERC20 asset,
+        IStrategy strategy,
         address vaultMaster,
         string memory name,
         string memory symbol
