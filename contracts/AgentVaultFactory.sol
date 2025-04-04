@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./AgentVault.sol";
-import "./interface/IVaultFactory.sol";
+import "./interface/IAgentVaultFactory.sol";
 
 /**
  * @title AgentVaultFactory

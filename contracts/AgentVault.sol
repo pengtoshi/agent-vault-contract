@@ -81,18 +81,26 @@ contract AgentVault is IAgentVault, ERC4626, AccessControl, ReentrancyGuard {
     }
 
     /// @inheritdoc IAgentVault
-    function withdraw(
-        uint256 assets,
+    function redeem(
+        uint256 shares,
         address receiver,
         address owner
-    ) public override(ERC4626, IAgentVault) nonReentrant returns (uint256 shares) {
+    ) public override(ERC4626, IAgentVault) nonReentrant returns (uint256 assets) {
+        // 인출할 자산 수량 미리 계산
+        uint256 assetsToWithdraw = previewRedeem(shares);
+
+        // Vault 잔액 확인
         uint256 currentBalance = IERC20(asset()).balanceOf(address(this));
-        if (currentBalance < assets) {
-            uint256 needed = assets - currentBalance;
+
+        // 잔액이 부족하면 Strategy에서 자산 인출
+        if (currentBalance < assetsToWithdraw) {
+            uint256 needed = assetsToWithdraw - currentBalance;
             strategy.withdraw(needed);
         }
-        shares = super.withdraw(assets, receiver, owner);
-        return shares;
+
+        // 상위 클래스 redeem 호출
+        assets = super.redeem(shares, receiver, owner);
+        return assets;
     }
 
     /// @inheritdoc IAgentVault
@@ -102,8 +110,8 @@ contract AgentVault is IAgentVault, ERC4626, AccessControl, ReentrancyGuard {
     }
 
     /// @inheritdoc IAgentVault
-    function withdrawAll() external returns (uint256 shares) {
-        return withdraw(balanceOf(msg.sender), msg.sender, msg.sender);
+    function redeemAll() external returns (uint256 shares) {
+        return redeem(balanceOf(msg.sender), msg.sender, msg.sender);
     }
 
     /// @inheritdoc IAgentVault

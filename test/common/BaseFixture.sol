@@ -9,14 +9,14 @@ import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.s
 import {IHello} from "contracts/interface/IHello.sol";
 import {Hello} from "contracts/Hello.sol";
 import {HelloUpgradeable} from "contracts/HelloUpgradeable.sol";
-import {IVaultFactory} from "contracts/interface/IVaultFactory.sol";
 import {AgentVaultFactory} from "contracts/AgentVaultFactory.sol";
 import {Constants} from "./Constants.sol";
+import {Utils} from "./Utils.sol";
 import {Users} from "./Users.sol";
 
 /// @title BaseFixture
 /// @notice A base fixture for all test suites
-abstract contract BaseFixture is Test, Constants {
+abstract contract BaseFixture is Test, Constants, Utils {
     Users internal users;
     IHello internal hello;
     IHello internal helloUpgradeable;

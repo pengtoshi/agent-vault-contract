@@ -41,14 +41,14 @@ interface IAgentVault is IERC4626 {
     function deposit(uint256 assets, address receiver) external returns (uint256 shares);
 
     /**
-     * @notice User withdrawal function (Override of ERC4626's withdraw)
+     * @notice User redemption function (Override of ERC4626's redeem)
      * - If Vault balance is insufficient, withdraws funds from Strategy
-     * @param assets Amount of assets to withdraw
+     * @param shares Amount of shares to redeem
      * @param receiver Address to receive assets
      * @param owner Address of Vault token owner
-     * @return shares Number of Vault tokens burned (ERC4626 standard)
+     * @return assets Number of assets returned to receiver (ERC4626 standard)
      */
-    function withdraw(uint256 assets, address receiver, address owner) external returns (uint256 shares);
+    function redeem(uint256 shares, address receiver, address owner) external returns (uint256 assets);
 
     /**
      * @notice Convenience function: Deposits all assets of msg.sender to Vault
@@ -58,7 +58,7 @@ interface IAgentVault is IERC4626 {
     /**
      * @notice Convenience function: Withdraws all assets using msg.sender's Vault tokens
      */
-    function withdrawAll() external returns (uint256 shares);
+    function redeemAll() external returns (uint256 shares);
 
     /**
      * @notice Function for AI Agent or Vault Master to change Strategy

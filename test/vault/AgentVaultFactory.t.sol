@@ -2,14 +2,16 @@
 pragma solidity ^0.8.27;
 
 import "../common/BaseFixture.sol";
-import {TestToken} from "../common/TestToken.sol";
-import {TestStrategy} from "contracts/test/TestStrategy.sol";
+import {TestToken} from "../mock/TestToken.sol";
+import {TestDefi} from "../mock/TestDefi.sol";
+import {TestStrategy} from "../mock/TestStrategy.sol";
 import {AgentVault} from "contracts/AgentVault.sol";
 import {IStrategy} from "contracts/interface/IStrategy.sol";
 
 contract AgentVaultFactoryTest is BaseFixture {
     TestToken internal testToken;
     TestStrategy internal testStrategy;
+    TestDefi internal testDefi;
 
     string constant VAULT_NAME = "Test Agent Vault Token";
     string constant VAULT_SYMBOL = "aVTEST";
@@ -23,8 +25,9 @@ contract AgentVaultFactoryTest is BaseFixture {
         // 테스트 토큰 배포
         testToken = new TestToken("Test Token", "TEST");
 
-        // 테스트 전략 배포 (10% 수익률)
-        testStrategy = new TestStrategy(IERC20(testToken), 1000);
+        // 테스트 Defi 및 전략 배포 (10% 수익률)
+        testDefi = new TestDefi(IERC20(testToken), 1000);
+        testStrategy = new TestStrategy(IERC20(testToken), testDefi);
     }
 
     function test_Initialize() public {
