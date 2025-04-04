@@ -7,7 +7,6 @@
     "cache": true,
     "cache_forge": true,
     "coverage": true,
-    "typechain-types": true,
     ".husky": true,
     ".lintstagedrc": true,
     ".prettierignore": true,
