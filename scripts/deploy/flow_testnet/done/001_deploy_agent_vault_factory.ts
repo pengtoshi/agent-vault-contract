@@ -2,6 +2,9 @@ import { ethers, upgrades } from "hardhat";
 import { DeployFunction, DeploymentSubmission } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
+// Change values by network
+const AGENT_INITIAL_FUND = ethers.utils.parseEther("100"); // 100 FLOW
+
 const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   const { deployments } = hre;
   const { save } = deployments;
@@ -9,14 +12,14 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   const [developer] = await ethers.getSigners();
 
   const network = process.env.NETWORK;
-  if (network !== "base_sepolia") {
-    throw new Error(`😇 This script is only for base sepolia.`);
+  if (network !== "flow_testnet") {
+    throw new Error(`😇 This script is only for flow testnet.`);
   }
   console.log("🪴 Deploy started with wallet: ", developer.address);
 
-  // AgentVaultFactory 배포
+  // Deploy AgentVaultFactory
   const AgentVaultFactoryContract = await ethers.getContractFactory("AgentVaultFactory");
-  const agentVaultFactory = await upgrades.deployProxy(AgentVaultFactoryContract, [], {
+  const agentVaultFactory = await upgrades.deployProxy(AgentVaultFactoryContract, [AGENT_INITIAL_FUND], {
     kind: "uups",
   });
   console.log("🚀 AgentVaultFactory deployed at", agentVaultFactory.address);

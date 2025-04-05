@@ -11,12 +11,12 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   const [developer] = await ethers.getSigners();
 
   const network = process.env.NETWORK;
-  if (network !== "base_sepolia") {
-    throw new Error(`😇 This script is only for base sepolia.`);
+  if (network !== "flow_testnet") {
+    throw new Error(`😇 This script is only for flow testnet.`);
   }
   console.log("🪴 Deploy started with wallet: ", developer.address);
 
-  // TestToken 배포
+  // Deploy TestToken
   const testToken = await deploy("TestToken", {
     from: developer.address,
     args: ["Test Token", "TEST"], // 이름, 심볼, 초기 공급량
@@ -29,13 +29,13 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   const testTokenContract = await ethers.getContract<TestToken>("TestToken");
   await (
     await testTokenContract.mint(developer.address, ethers.utils.parseEther("1000000"), {
-      gasLimit: GAS_LIMIT.BASE_SEPOLIA,
+      gasLimit: GAS_LIMIT.FLOW_TESTNET,
     })
   ).wait();
   console.log(`🚀 TestToken minted to ${developer.address}`);
 
-  // TestDefi 배포 (연 1000% 수익률로 설정)
-  const YIELD_RATE = 100000; // 연 1000%
+  // Deploy TestDefi (1000% yield rate)
+  const YIELD_RATE = 100000; // 1000%
   const testDefi = await deploy("TestDefi", {
     from: developer.address,
     args: [testToken.address, YIELD_RATE],
@@ -44,7 +44,7 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   });
   console.log("🚀 TestDefi deployed at", testDefi.address);
 
-  // TestStrategy 배포
+  // Deploy TestStrategy
   const testStrategy = await deploy("TestStrategy", {
     from: developer.address,
     args: [testToken.address, testDefi.address],
