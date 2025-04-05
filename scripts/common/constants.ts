@@ -5,4 +5,5 @@ export const GAS_LIMIT = {
   DEPLOY: 10000000,
 };
 
-export const ROOTSTOCK_GAS_PRICE = BigNumber.from(30000000);
+export const ROOTSTOCK_GAS_PRICE = BigNumber.from(50000000);
+export const POLYGON_GAS_PRICE = BigNumber.from(100000000000);

@@ -3,7 +3,7 @@
   "chainId": "44787",
   "contracts": {
     "AgentVaultFactory": {
-      "address": "0xe3927e57Fa5caA8Ae01c140099C2ceada3DF7163",
+      "address": "0x519B51aC32ec0857de0AffECa3F22B3C9F8E0cDD",
       "abi": [
         {
           "inputs": [],
@@ -361,7 +361,7 @@
       ]
     },
     "TestToken": {
-      "address": "0xae933Cc97Fd5AC48cb1726508ac2d3BE3BF92032",
+      "address": "0x35FD13581cCd35c79F01Ce605a07ef46fAE2791f",
       "abi": [
         {
           "inputs": [
@@ -726,7 +726,7 @@
       ]
     },
     "TestDefi": {
-      "address": "0xB93b8C373c2Db8234B6c162E016dbc69C3F981D5",
+      "address": "0x6e57e8Dd5764F2C2C176B878808BC73b2a8AcE42",
       "abi": [
         {
           "inputs": [
@@ -870,7 +870,7 @@
       ]
     },
     "TestStrategy": {
-      "address": "0x88d4dBE8aA4fdE0BF4a1Ac640DD34352734E763a",
+      "address": "0x0e68e946f4F2141A8AE0b3C8851140b50D71Ecbd",
       "abi": [
         {
           "inputs": [
@@ -977,7 +977,7 @@
       ]
     },
     "AltTestDefi": {
-      "address": "0x3b59969E59330DB9703f19946edE8E66A170CdA6",
+      "address": "0x330EBFf1F8c8797Fb930a670A67CE864b7887059",
       "abi": [
         {
           "inputs": [
@@ -1121,7 +1121,7 @@
       ]
     },
     "AltTestStrategy": {
-      "address": "0xBb69A1fCb1b530c4f5e8E3598d309fb50fbeA3C8",
+      "address": "0x9DB4070b99Fd5193097Ff19DC12859D6fB6bAdC4",
       "abi": [
         {
           "inputs": [

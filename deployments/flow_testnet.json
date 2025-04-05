@@ -3,7 +3,7 @@
   "chainId": "545",
   "contracts": {
     "AgentVaultFactory": {
-      "address": "0xe3927e57Fa5caA8Ae01c140099C2ceada3DF7163",
+      "address": "0x330EBFf1F8c8797Fb930a670A67CE864b7887059",
       "abi": [
         {
           "inputs": [],
@@ -360,259 +360,8 @@
         }
       ]
     },
-    "TestDefi": {
-      "address": "0xB93b8C373c2Db8234B6c162E016dbc69C3F981D5",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "_stakingToken",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_yieldRate",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "harvest",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "name": "lastYieldTime",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_yieldRate",
-              "type": "uint256"
-            }
-          ],
-          "name": "setYieldRate",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "stake",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "stakedBalanceOf",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "stakingToken",
-          "outputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "totalStaked",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "unstake",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "yieldRate",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    "TestStrategy": {
-      "address": "0x88d4dBE8aA4fdE0BF4a1Ac640DD34352734E763a",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "_want",
-              "type": "address"
-            },
-            {
-              "internalType": "contract TestDefi",
-              "name": "_defi",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "balanceOf",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "beforeDeposit",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "defi",
-          "outputs": [
-            {
-              "internalType": "contract TestDefi",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "deposit",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "retireStrategy",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_yieldRate",
-              "type": "uint256"
-            }
-          ],
-          "name": "setYieldRate",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "want",
-          "outputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "withdraw",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
     "TestToken": {
-      "address": "0xae933Cc97Fd5AC48cb1726508ac2d3BE3BF92032",
+      "address": "0x9DB4070b99Fd5193097Ff19DC12859D6fB6bAdC4",
       "abi": [
         {
           "inputs": [
@@ -976,8 +725,259 @@
         }
       ]
     },
+    "TestDefi": {
+      "address": "0xAAB76f6fD25eDa30E73126cEC4Be916b93577EA2",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "_stakingToken",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_yieldRate",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "harvest",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "lastYieldTime",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_yieldRate",
+              "type": "uint256"
+            }
+          ],
+          "name": "setYieldRate",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "stake",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "stakedBalanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "stakingToken",
+          "outputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "totalStaked",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "unstake",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "yieldRate",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    "TestStrategy": {
+      "address": "0xbEcC4a216f8c7D742AF2B2d9D686d1aA941DFcA2",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "_want",
+              "type": "address"
+            },
+            {
+              "internalType": "contract TestDefi",
+              "name": "_defi",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "beforeDeposit",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "defi",
+          "outputs": [
+            {
+              "internalType": "contract TestDefi",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "deposit",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "retireStrategy",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_yieldRate",
+              "type": "uint256"
+            }
+          ],
+          "name": "setYieldRate",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "want",
+          "outputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "withdraw",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
     "AltTestDefi": {
-      "address": "0x3b59969E59330DB9703f19946edE8E66A170CdA6",
+      "address": "0xEECA4Abeadc3D4e4f62043aAF4c8aAF2F64f99f3",
       "abi": [
         {
           "inputs": [
@@ -1121,7 +1121,7 @@
       ]
     },
     "AltTestStrategy": {
-      "address": "0xBb69A1fCb1b530c4f5e8E3598d309fb50fbeA3C8",
+      "address": "0xC01628220c9545158b1175b99AF07F0029e48E49",
       "abi": [
         {
           "inputs": [

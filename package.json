@@ -11,6 +11,8 @@
     "deploy:flow_testnet": "dotenv -e ./tools/env/.env.flow_testnet -- npx hardhat deploy --network flow_testnet --export ./deployments/flow_testnet.json",
     "deploy:rootstock_testnet": "dotenv -e ./tools/env/.env.rootstock_testnet -- npx hardhat deploy --network rootstock_testnet --export ./deployments/rootstock_testnet.json",
     "deploy:celo_testnet": "dotenv -e ./tools/env/.env.celo_testnet -- npx hardhat deploy --network celo_testnet --export ./deployments/celo_testnet.json",
+    "deploy:polygon_amoy": "dotenv -e ./tools/env/.env.polygon_amoy -- npx hardhat deploy --network polygon_amoy --export ./deployments/polygon_amoy.json",
+    "deploy:zircuit_testnet": "dotenv -e ./tools/env/.env.zircuit_testnet -- npx hardhat deploy --network zircuit_testnet --export ./deployments/zircuit_testnet.json",
     "prepare": "npm-run-all prepare:*",
     "prepare:husky": "husky install",
     "test": "dotenv -e ./tools/env/.env.local -- forge test -vv",

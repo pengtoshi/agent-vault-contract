@@ -53,6 +53,18 @@ const config: HardhatUserConfig = {
       from: DEVELOPER_ACCOUNT || "",
       accounts: [DEVELOPER_PRIVATE_KEY || "0"],
     },
+    polygon_amoy: {
+      url: PROVIDER_URL || "",
+      chainId: +(CHAIN_ID || 0),
+      from: DEVELOPER_ACCOUNT || "",
+      accounts: [DEVELOPER_PRIVATE_KEY || "0"],
+    },
+    zircuit_testnet: {
+      url: PROVIDER_URL || "",
+      chainId: +(CHAIN_ID || 0),
+      from: DEVELOPER_ACCOUNT || "",
+      accounts: [DEVELOPER_PRIVATE_KEY || "0"],
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
