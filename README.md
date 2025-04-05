@@ -4,7 +4,7 @@
 
 This is the contract repository for Vault Royale.
 
-- [Monorepo Link](https://github.com/pengtoshi/agent-vault-monorepo)
+- [Monorepo Link](https://github.com/pengtoshi/vault-royale-monorepo)
 
 <br/>
 
