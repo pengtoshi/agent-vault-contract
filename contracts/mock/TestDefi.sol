@@ -72,7 +72,9 @@ contract TestDefi {
      */
     function unstake(uint256 amount) external {
         require(amount > 0, "Cannot unstake 0");
-        require(_stakedBalance[msg.sender] >= amount, "Insufficient staked balance");
+
+        uint256 totalBalance = stakedBalanceOf(msg.sender);
+        require(amount <= totalBalance, "Insufficient staked balance");
 
         // 먼저 기존 수익 계산
         _calculateYield(msg.sender);
@@ -100,7 +102,7 @@ contract TestDefi {
      * @param account 조회할 사용자 주소
      * @return 스테이킹된 잔액 (수익 포함)
      */
-    function stakedBalanceOf(address account) external view returns (uint256) {
+    function stakedBalanceOf(address account) public view returns (uint256) {
         if (_stakedBalance[account] == 0) {
             return 0;
         }

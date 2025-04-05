@@ -69,6 +69,9 @@ contract TestStrategy is IStrategy {
 
     /// @inheritdoc IStrategy
     function retireStrategy() external override {
+        // 먼저 수익 수확
+        defi.harvest();
+
         // TestDefi에서 모든 자산 출금
         uint256 stakedBalance = defi.stakedBalanceOf(address(this));
         if (stakedBalance > 0) {
