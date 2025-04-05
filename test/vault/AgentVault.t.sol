@@ -22,7 +22,7 @@ contract AgentVaultTest is BaseFixture {
 
         // Create vault
         vm.startPrank(users.owner);
-        address vaultAddress = vaultFactory.createVault(
+        address vaultAddress = vaultFactory.createVault{value: AGENT_INITIAL_FUND}(
             IERC20(testToken),
             strategy,
             users.owner,
@@ -41,5 +41,6 @@ contract AgentVaultTest is BaseFixture {
         assertEq(address(vault.strategy()), address(strategy));
         assertEq(vault.name(), "Test Vault");
         assertEq(vault.symbol(), "TV");
+        assertEq(users.agent.balance, AGENT_INITIAL_FUND);
     }
 }

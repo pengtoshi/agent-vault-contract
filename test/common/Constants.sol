@@ -11,5 +11,7 @@ abstract contract Constants {
     uint256 public constant INITIAL_BALANCE = 1000 * TOKEN_1;
     uint256 public constant DEFAULT_AMOUNT = 100 * TOKEN_1;
 
+    uint256 public constant AGENT_INITIAL_FUND = 0.1 ether;
+
     // NOTE: Add constants below
 }

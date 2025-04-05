@@ -82,7 +82,7 @@ const _abi = [
         type: "address",
       },
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {

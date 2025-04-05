@@ -31,7 +31,7 @@ interface IAgentVaultFactory {
         address agent,
         string memory name,
         string memory symbol
-    ) external returns (address vault);
+    ) external payable returns (address vault);
 
     /**
      * @notice Returns all deployed vault addresses

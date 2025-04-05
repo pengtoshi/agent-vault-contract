@@ -23,10 +23,11 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 interface AgentVaultFactoryInterface extends ethers.utils.Interface {
   functions: {
     "UPGRADE_INTERFACE_VERSION()": FunctionFragment;
+    "agentInitialFund()": FunctionFragment;
     "createVault(address,address,address,address,string,string)": FunctionFragment;
     "getAllVaults()": FunctionFragment;
     "getVaultCount()": FunctionFragment;
-    "initialize()": FunctionFragment;
+    "initialize(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "proxiableUUID()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -37,6 +38,10 @@ interface AgentVaultFactoryInterface extends ethers.utils.Interface {
 
   encodeFunctionData(
     functionFragment: "UPGRADE_INTERFACE_VERSION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "agentInitialFund",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -53,7 +58,7 @@ interface AgentVaultFactoryInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "initialize",
-    values?: undefined
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -79,6 +84,10 @@ interface AgentVaultFactoryInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "UPGRADE_INTERFACE_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "agentInitialFund",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -172,6 +181,8 @@ export class AgentVaultFactory extends BaseContract {
   functions: {
     UPGRADE_INTERFACE_VERSION(overrides?: CallOverrides): Promise<[string]>;
 
+    agentInitialFund(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     createVault(
       asset: string,
       strategy: string,
@@ -179,7 +190,7 @@ export class AgentVaultFactory extends BaseContract {
       agent: string,
       name: string,
       symbol: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     getAllVaults(overrides?: CallOverrides): Promise<[string[]]>;
@@ -187,6 +198,7 @@ export class AgentVaultFactory extends BaseContract {
     getVaultCount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     initialize(
+      _agentInitialFund: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -214,6 +226,8 @@ export class AgentVaultFactory extends BaseContract {
 
   UPGRADE_INTERFACE_VERSION(overrides?: CallOverrides): Promise<string>;
 
+  agentInitialFund(overrides?: CallOverrides): Promise<BigNumber>;
+
   createVault(
     asset: string,
     strategy: string,
@@ -221,7 +235,7 @@ export class AgentVaultFactory extends BaseContract {
     agent: string,
     name: string,
     symbol: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   getAllVaults(overrides?: CallOverrides): Promise<string[]>;
@@ -229,6 +243,7 @@ export class AgentVaultFactory extends BaseContract {
   getVaultCount(overrides?: CallOverrides): Promise<BigNumber>;
 
   initialize(
+    _agentInitialFund: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -256,6 +271,8 @@ export class AgentVaultFactory extends BaseContract {
   callStatic: {
     UPGRADE_INTERFACE_VERSION(overrides?: CallOverrides): Promise<string>;
 
+    agentInitialFund(overrides?: CallOverrides): Promise<BigNumber>;
+
     createVault(
       asset: string,
       strategy: string,
@@ -270,7 +287,10 @@ export class AgentVaultFactory extends BaseContract {
 
     getVaultCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    initialize(overrides?: CallOverrides): Promise<void>;
+    initialize(
+      _agentInitialFund: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -323,6 +343,8 @@ export class AgentVaultFactory extends BaseContract {
   estimateGas: {
     UPGRADE_INTERFACE_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
 
+    agentInitialFund(overrides?: CallOverrides): Promise<BigNumber>;
+
     createVault(
       asset: string,
       strategy: string,
@@ -330,7 +352,7 @@ export class AgentVaultFactory extends BaseContract {
       agent: string,
       name: string,
       symbol: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     getAllVaults(overrides?: CallOverrides): Promise<BigNumber>;
@@ -338,6 +360,7 @@ export class AgentVaultFactory extends BaseContract {
     getVaultCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(
+      _agentInitialFund: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -368,6 +391,8 @@ export class AgentVaultFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    agentInitialFund(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     createVault(
       asset: string,
       strategy: string,
@@ -375,7 +400,7 @@ export class AgentVaultFactory extends BaseContract {
       agent: string,
       name: string,
       symbol: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     getAllVaults(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -383,6 +408,7 @@ export class AgentVaultFactory extends BaseContract {
     getVaultCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     initialize(
+      _agentInitialFund: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

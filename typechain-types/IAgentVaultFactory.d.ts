@@ -11,7 +11,7 @@ import {
   PopulatedTransaction,
   BaseContract,
   ContractTransaction,
-  Overrides,
+  PayableOverrides,
   CallOverrides,
 } from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
@@ -110,7 +110,7 @@ export class IAgentVaultFactory extends BaseContract {
       agent: string,
       name: string,
       symbol: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     getAllVaults(overrides?: CallOverrides): Promise<[string[]]>;
@@ -125,7 +125,7 @@ export class IAgentVaultFactory extends BaseContract {
     agent: string,
     name: string,
     symbol: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   getAllVaults(overrides?: CallOverrides): Promise<string[]>;
@@ -168,7 +168,7 @@ export class IAgentVaultFactory extends BaseContract {
       agent: string,
       name: string,
       symbol: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     getAllVaults(overrides?: CallOverrides): Promise<BigNumber>;
@@ -184,7 +184,7 @@ export class IAgentVaultFactory extends BaseContract {
       agent: string,
       name: string,
       symbol: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     getAllVaults(overrides?: CallOverrides): Promise<PopulatedTransaction>;

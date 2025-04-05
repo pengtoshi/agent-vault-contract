@@ -26,6 +26,8 @@ abstract contract BaseFixture is Test, Constants, Utils {
             agent: createUser("Agent")
         });
 
+        vm.deal(users.owner, 1 ether);
+
         vm.startPrank(users.owner);
         deployDependencies();
         vm.stopPrank();
@@ -34,7 +36,7 @@ abstract contract BaseFixture is Test, Constants, Utils {
     function deployDependencies() public virtual {
         /* deploy vault factory */
         address vaultFactoryImplementation = address(new AgentVaultFactory());
-        bytes memory vaultFactoryInitData = abi.encodeCall(AgentVaultFactory.initialize, ());
+        bytes memory vaultFactoryInitData = abi.encodeCall(AgentVaultFactory.initialize, (AGENT_INITIAL_FUND));
         address vaultFactoryProxy = address(new ERC1967Proxy(vaultFactoryImplementation, vaultFactoryInitData));
         vaultFactory = AgentVaultFactory(vaultFactoryProxy);
     }

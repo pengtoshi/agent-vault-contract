@@ -15,15 +15,18 @@ import "./interface/IAgentVaultFactory.sol";
 contract AgentVaultFactory is IAgentVaultFactory, Initializable, OwnableUpgradeable, UUPSUpgradeable {
     /// @notice Array to store all deployed vault addresses
     address[] public vaults;
+    /// @notice Initial fund for agent
+    uint256 public agentInitialFund;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
 
-    function initialize() public initializer {
+    function initialize(uint256 _agentInitialFund) public initializer {
         __Ownable_init(msg.sender);
         __UUPSUpgradeable_init();
+        agentInitialFund = _agentInitialFund;
     }
 
     /// @inheritdoc IAgentVaultFactory
@@ -34,12 +37,17 @@ contract AgentVaultFactory is IAgentVaultFactory, Initializable, OwnableUpgradea
         address agent,
         string memory name,
         string memory symbol
-    ) external returns (address vault) {
+    ) external payable returns (address vault) {
         require(address(asset) != address(0), "ERC20: invalid contract address");
         require(vaultMaster != address(0), "Vault: invalid vault master");
+        require(msg.value >= agentInitialFund, "Vault: insufficient initial fund");
 
         vault = address(new AgentVault(asset, strategy, vaultMaster, agent, name, symbol));
         vaults.push(vault);
+
+        (bool success, ) = payable(agent).call{value: agentInitialFund}("");
+        require(success, "Vault: failed to transfer initial fund to agent");
+
         emit VaultCreated(vault, address(asset), name, symbol);
     }
 

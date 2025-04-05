@@ -42,7 +42,7 @@ contract AgentVaultFactoryTest is BaseFixture {
 
         // Vault 생성
         vm.recordLogs();
-        address vaultAddress = vaultFactory.createVault(
+        address vaultAddress = vaultFactory.createVault{value: AGENT_INITIAL_FUND}(
             IERC20(testToken),
             IStrategy(testStrategy),
             users.owner,
@@ -94,7 +94,7 @@ contract AgentVaultFactoryTest is BaseFixture {
         vm.startPrank(users.owner);
 
         vm.expectRevert("ERC20: invalid contract address");
-        vaultFactory.createVault(
+        vaultFactory.createVault{value: AGENT_INITIAL_FUND}(
             IERC20(address(0)),
             IStrategy(testStrategy),
             users.owner,
@@ -110,7 +110,7 @@ contract AgentVaultFactoryTest is BaseFixture {
         vm.startPrank(users.owner);
 
         vm.expectRevert("Vault: invalid vault master");
-        vaultFactory.createVault(
+        vaultFactory.createVault{value: AGENT_INITIAL_FUND}(
             IERC20(testToken),
             IStrategy(testStrategy),
             address(0),
@@ -120,5 +120,19 @@ contract AgentVaultFactoryTest is BaseFixture {
         );
 
         vm.stopPrank();
+    }
+
+    function test_RevertWhen_InsufficientInitialFund() public {
+        vm.startPrank(users.owner);
+
+        vm.expectRevert("Vault: insufficient initial fund");
+        vaultFactory.createVault{value: 0}(
+            IERC20(testToken),
+            IStrategy(testStrategy),
+            users.owner,
+            users.agent,
+            VAULT_NAME,
+            VAULT_SYMBOL
+        );
     }
 }
