@@ -11,8 +11,8 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   const [developer] = await ethers.getSigners();
 
   const network = process.env.NETWORK;
-  if (network !== "flow_testnet") {
-    throw new Error(`😇 This script is only for flow testnet.`);
+  if (network !== "celo_testnet") {
+    throw new Error(`😇 This script is only for celo testnet.`);
   }
   console.log("🪴 Deploy started with wallet: ", developer.address);
 

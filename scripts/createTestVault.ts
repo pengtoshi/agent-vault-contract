@@ -14,7 +14,7 @@ const createTestVault = async () => {
     await agentVaultFactory
       .connect(developer)
       .createVault(testToken.address, testStrategy.address, developer.address, developer.address, "AIVault1", "AIV1", {
-        gasLimit: GAS_LIMIT.BASE_SEPOLIA_CONTRACT_DEPLOYMENT,
+        gasLimit: GAS_LIMIT.DEPLOY,
       })
   ).wait();
 
@@ -29,7 +29,7 @@ const createTestVault = async () => {
         "AIVault2",
         "AIV2",
         {
-          gasLimit: GAS_LIMIT.BASE_SEPOLIA_CONTRACT_DEPLOYMENT,
+          gasLimit: GAS_LIMIT.DEPLOY,
         },
       )
   ).wait();

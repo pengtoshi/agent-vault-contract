@@ -9,6 +9,8 @@
     "deploy:base_sepolia": "dotenv -e ./tools/env/.env.base_sepolia -- npx hardhat deploy --network base_sepolia --export ./deployments/base_sepolia.json",
     "run:base_sepolia": "dotenv -e ./tools/env/.env.base_sepolia -- npx hardhat run --network base_sepolia",
     "deploy:flow_testnet": "dotenv -e ./tools/env/.env.flow_testnet -- npx hardhat deploy --network flow_testnet --export ./deployments/flow_testnet.json",
+    "deploy:rootstock_testnet": "dotenv -e ./tools/env/.env.rootstock_testnet -- npx hardhat deploy --network rootstock_testnet --export ./deployments/rootstock_testnet.json",
+    "deploy:celo_testnet": "dotenv -e ./tools/env/.env.celo_testnet -- npx hardhat deploy --network celo_testnet --export ./deployments/celo_testnet.json",
     "prepare": "npm-run-all prepare:*",
     "prepare:husky": "husky install",
     "test": "dotenv -e ./tools/env/.env.local -- forge test -vv",

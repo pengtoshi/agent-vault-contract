@@ -14,7 +14,7 @@ const setAgent = async () => {
   const vaultContract = await ethers.getContractAt<AgentVault>("AgentVault", strategyVaultAddress);
   await (
     await vaultContract.connect(developer).grantAgentRole(developer.address, {
-      gasLimit: GAS_LIMIT.BASE_SEPOLIA,
+      gasLimit: GAS_LIMIT.NORMAL,
     })
   ).wait();
 
@@ -24,7 +24,7 @@ const setAgent = async () => {
   const altVaultContract = await ethers.getContractAt<AgentVault>("AgentVault", altStrategyVaultAddress);
   await (
     await altVaultContract.connect(developer).grantAgentRole(developer.address, {
-      gasLimit: GAS_LIMIT.BASE_SEPOLIA,
+      gasLimit: GAS_LIMIT.NORMAL,
     })
   ).wait();
 
