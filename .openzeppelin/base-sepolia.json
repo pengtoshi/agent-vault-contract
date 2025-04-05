@@ -10,6 +10,16 @@
       "address": "0xe26cf429FF7BA70cBb1c364Bc99F828c777d77a0",
       "txHash": "0xebf0d74aecfab20e34aba0c89ad13589cdee6aa3d24035c825f330f21594ce81",
       "kind": "uups"
+    },
+    {
+      "address": "0xc280662d2B13c52Be696b571a2A2796B9B32044E",
+      "txHash": "0xfd4105e6a1ffe8514722bedade53456eeb620494ec945e9e8c3f61b542c83061",
+      "kind": "uups"
+    },
+    {
+      "address": "0x60D5ad54f2E4fDA1711e5275bA14Df1867ACf58D",
+      "txHash": "0x92673f072fe50e7a957cc61475bacb03302cf3e933db9117f494c64a0db92dfc",
+      "kind": "uups"
     }
   ],
   "impls": {
@@ -96,6 +106,75 @@
               "label": "_roles",
               "type": "t_mapping(t_bytes32,t_struct(RoleData)25_storage)",
               "src": "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol:61"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73"
+            }
+          ]
+        }
+      }
+    },
+    "83bb7a797bb2895201ccddeb9b42e017ac959888c8b2c7d09b22c29936aaf3e2": {
+      "address": "0xCfb652Af395283cDbaAB988f4af866e2A415789a",
+      "txHash": "0xeb7626d963f4c54505ccef22871e291babe674fd5c8fee426a8d00e994ce5aec",
+      "layout": {
+        "solcVersion": "0.8.27",
+        "storage": [
+          {
+            "label": "vaults",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "AgentVaultFactory",
+            "src": "contracts/AgentVaultFactory.sol:17"
+          },
+          {
+            "label": "agentInitialFund",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256",
+            "contract": "AgentVaultFactory",
+            "src": "contracts/AgentVaultFactory.sol:19"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24"
             }
           ],
           "erc7201:openzeppelin.storage.Initializable": [
